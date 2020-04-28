@@ -1,0 +1,31 @@
+int led = D7;
+int x = 0;
+
+void setup() {
+    //fail safe to know code is starting
+    pinMode(led, OUTPUT);
+    digitalWrite(led, HIGH);
+    delay(2000);
+    digitalWrite(led, LOW);
+    
+
+}
+
+void loop() {
+    
+    //sets x to random variable between 1-100
+    int x = random(0, 100);
+    
+    //if statement reads artificial variable for light sensor replacement
+    //publishes either high or low based off value to signify light hitting the sensor
+    if (x >= 50) {
+     Particle.publish("light", "high", PRIVATE);
+    }
+     else if (x < 50) {
+     Particle.publish("light", "low", PRIVATE);
+     }
+//delay required to not overload system with publish, 15seconds
+delay(20000);
+    
+
+}
